@@ -63,8 +63,6 @@ TEST_F(DriverTestFixture, WritePass) {
 	EXPECT_EQ(0xAA, deviceDriver.read(0x30));
 }
 
-
-
 TEST_F(DriverTestFixture, WriteFail) {
 
 	EXPECT_CALL(fakeFlash, read(0x30))

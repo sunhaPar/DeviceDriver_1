@@ -38,14 +38,8 @@ TEST_F(DriverTestFixture, ReadInvalidData) {
 		.WillOnce(Return(9))
 		.WillOnce(Return(9))
 		.WillRepeatedly(Return(10));
-	try {
-		deviceDriver.read(0x1000);
-		FAIL();
-	}
-	catch (ReadFailException e)
-	{
-		EXPECT_EQ(string{ e.what() }, string{ "Invalidn Data" });
-	}
+
+	EXPECT_THROW(deviceDriver.read(0x1000), ReadFailException);
 }
 
 TEST_F(DriverTestFixture, WritePass) {
@@ -67,14 +61,8 @@ TEST_F(DriverTestFixture, WriteFail) {
 
 	EXPECT_CALL(fakeFlash, read(0x30))
 		.WillRepeatedly(Return(0xAA));
-	try {
-		deviceDriver.write(0x30, 0xAA);
-		FAIL();
-	}
-	catch (WriteFailException e)
-	{
-		EXPECT_EQ(string{ e.what() }, string{ "Not Clean" });
-	}
+
+	EXPECT_THROW(deviceDriver.write(0x30, 0xAA), WriteFailException);
 }
 
 

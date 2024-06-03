@@ -10,4 +10,4 @@ public:
 
 protected:
     FlashMemoryDevice* m_hardware;
-}; #pragma once
+};
